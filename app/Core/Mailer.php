@@ -6,7 +6,7 @@ use Exception;
 use stdClass;
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Mail {
+class Mailer {
 
     private $mail;
     private $data;
@@ -30,17 +30,12 @@ class Mail {
         $this->mail->Password = getenv("MAIL_PASSWORD");
     }
 
-    public function add(string $subject, string $body, string $recipientName, string $recipientEmail): Mail {
+    public function add(string $subject, string $body, string $recipientName, string $recipientEmail): Mailer {
         $this->data->subject = $subject;
         $this->data->body = $body;
         $this->data->recipientName = $recipientName;
         $this->data->recipientEmail = $recipientEmail;
 
-        return $this;
-    }
-
-    public function attach(string $filePath, string $fileName): Mail {
-        $this->data->attach[$filePath] = $fileName;
         return $this;
     }
 
@@ -51,12 +46,6 @@ class Mail {
             $this->mail->msgHTML($this->data->body);
             $this->mail->addAddress($this->data->recipientEmail, $this->data->recipientEmail);
             $this->mail->setFrom($fromEmail, $fromName);
-            
-            if(!empty($this->data->attach)) {
-                foreach($this->data->attach as $path => $name) {
-                    $this->mail->addAttachment($path, $name);
-                }
-            } 
 
             $this->mail->send();
             return true;

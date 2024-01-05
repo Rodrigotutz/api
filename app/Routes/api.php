@@ -8,4 +8,6 @@ $router->namespace("App\Controllers");
 
 $router->get('/', "Api:index", "api.index");
 
+$router->get('/email/{email}', "Mail:sendEmail", "mail.sendemail");
+
 $router->dispatch();
