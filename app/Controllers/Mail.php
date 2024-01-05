@@ -9,15 +9,15 @@ class Mail extends Controller {
 
     private $mail;
 
-    public function sendEmail($email) {
-        $this->mail = new Mailer();
-
-        $mail = filter_var($email, FILTER_VALIDATE_EMAIL );
-
-        $this->mail->add(
+    public function sendEmail($data) {
+        echo json_decode("E-mail Enviado");
+        
+        //$this->mail = new Mailer();      
+        //$mail = filter_var($email, FILTER_VALIDATE_EMAIL );
+        /*$this->mail->add(
             "Teste de Api de disparo de e-mails",
             "<h1>Enviado<h1/>",
-            "Maconheiro",
+            $name,
             $mail
         );
 
@@ -25,6 +25,6 @@ class Mail extends Controller {
             echo "Não enviado";
         }else {
             echo "Enviado";
-        }
+        }*/
     }
 }
